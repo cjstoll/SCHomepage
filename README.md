@@ -12,8 +12,11 @@ Using a natural language search form (modeled after http://bit.ly/1HywsT0 - Natu
 3) When the user clicks the Find It! button, the results will show the results based on the solution type, industry, and product selected.
 
 4) The product list entries will provide hyperlinks to the respective items.
+
    a) The product name field should be hyperlinked to /[data_set_name]/[element_id]. 
+   
    b) The industry field should be hyperlinked to /[data_set_name]/industries/[industry_id] 
+   
    c) The product field should be hyperlinked to /[data_set_name]/products/[product_id] 
  
  **Note: The '_id' elements were not part of the provided dataset.
