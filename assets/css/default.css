@@ -1,0 +1,219 @@
+/**
+ * default.css 
+ *
+ * *****************************
+ *
+ * Some things borrowed from nlform.js v1.0.0
+ * -- http://www.codrops.com
+ * Licensed under the MIT license.
+ * -- http://www.opensource.org/licenses/mit-license.php
+ * Copyright 2013, Codrops
+ * -- http://www.codrops.com
+ *
+ * *****************************
+ *
+ * Modified By: Christopher J Stoll
+ * Date: November 2016
+ * *****************************
+ */
+
+
+*, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+body, html { font-size: 100%; padding: 0; margin: 0;}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before, .clearfix:after { content: " "; display: table; }
+.clearfix:after { clear: both; }
+
+body {
+	font-family: Calibri, Arial, sans-serif;
+    color: #000;
+	background-color: #fff;
+	font-weight: 300;
+	overflow-x: hidden;
+	height: 100%;
+}
+#body {
+	padding-bottom:60px;
+}
+a {
+	color: #888;
+	text-decoration: none;
+}
+
+a:hover,
+a:active {
+	color: #333;
+}
+
+select{
+  color: #fff;
+  background-color: #e11e25;
+  background-color: var(--lipstick);
+}
+
+.container {
+  margin: 0 auto;
+  width: 960px;
+  background: #fff;
+  background-color: #fff;
+}
+.navigation {
+  top: 0;
+  height: 34.5px;
+  color: #fff;
+  background: #333;
+  background-color: #333;
+  vertical-align: middle;
+  line-height: 34.5px;
+}
+.navigation span {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 12px;
+}
+.navigation img{
+  height: 12px;
+  margin-left: 10px;
+}
+
+.search-bar {
+  height: 36px;
+  color: #fff;
+  background: #333;
+  background-color: #333;
+  vertical-align: middle;
+  line-height: 36px;
+}
+.search-bar img{
+  height: 12px;
+}
+.search-bar input {
+  margin: 10px;
+  font-size: 12px;
+  color: #333;
+  height: 20px;
+  width: 95%;
+}
+
+.bg-welcome-hero2x {
+  height: 61px;
+  color: #fff;
+  background: #000;
+  background-color: #000;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 61px;
+}
+.bg-welcome-hero2x span{
+  width: 559.5px;
+  height: 15px;
+  font-size: 17px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.88;
+  color: #adadad;
+}
+.main{
+  margin: 0 auto;
+  margin-top: 35.1px;
+  color: #adadad;
+  text-align: center;
+}
+
+.Line-Copy-2 {
+  width: 268.5px;
+  height: 1.5px;
+  color: #b1b1b1;
+  background-color: #b1b1b1;
+  margin: 1em auto;
+}
+
+.resultcontainer {
+  margin: 0 auto;
+  width: 930px;
+  height: 450px;
+  color: #000;
+  background: #fff;
+  background-color: #fff;
+}
+
+
+.submitcontainer {
+  margin: 0 auto;
+  width: 960px;
+  background: #fff;
+  background-color: #fff;
+}
+
+.lightbulb {
+  width: 48px;
+  height: 45.5px;
+}
+
+.trophy {
+  width: 45.5px;
+  height: 45px;
+}
+
+.Submit-a-Solution {
+  width: 118.5px;
+  height: 71px;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.54;
+  color: #4a4a4a;
+  float:left;
+  text-align:center;
+  text-decoration: underline;
+}
+
+.Submit-a-Solution-Wi {
+  width: 147px;
+  height: 71px;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.54;
+  color: #4a4a4a;
+  float:right;
+  text-align:center;
+  text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+  margin: 0 auto;
+  width: 930px;
+  height: 230px;
+  border: transparent; 
+  right: 0;
+  left: 0;
+  color: #fff;
+  text-align: center;
+  background: #333333;
+  background-color: #333333;
+}
+.footercol{
+  text-align: left;
+  font-size: 7px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 5.07;
+  color: #dfdfdf;
+}
+
+@media screen and (max-width: 25em) {
+
+	.codrops-icon span {
+		display: none;
+	}
+
+}
+

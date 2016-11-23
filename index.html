@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html ng-app="scApp">
+    <head>    
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<title>Solution Center</title>
+		<meta name="description" content="Solution Center - Natural Language Form" />
+		<meta name="keywords" content="Natural Language UI, sentence form, text input, contenteditable, html5, css3, jquery" />
+		<meta name="author" content="cstoll" />
+		
+		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/component.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/default.css" />
+		
+		<script src="assets/js/jquery-3.1.1.min.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/angular.min.js"></script>
+		<script src="assets/js/angular-ui.min.js"></script>
+		<script src="assets/js/modernizr.custom.js"></script>
+		<script src="assets/js/nlform.mod.js"></script>
+		<script src="assets/js/schomepage.js"></script>
+	</head>
+	<body>
+		<div id="body">
+		<div class="container clearfix" ng-controller="scController">
+			<div class="navigation">
+				<img src="assets/images/logo-rev.png"><span>Solutions</span><span>Wins</span><span>People</span><span>Demo Center</span>
+			</div>
+			<div class="search-bar">
+				<input type="text" value="Search Solution Center ..."></input><img src="assets/images/btn-mobilesearch.png">
+			</div>
+			<div class="bg-welcome-hero2x">
+				<span>Welcome, <span style='color:#e11e25;'>Cory!</span> What would you like to accomplish today?</span>
+			</div>
+			<div class="main">
+				<form id="nl-form" class="nl-form">
+					I need a 
+					<select id="selSolution" ng-model="selSolution" ng-options="option.id as option.name for option in solutionTypes" ng-change="updateIndustry()"></select>
+					for
+					<select id="selIndustry" ng-model="selIndustry" ng-options="option.industry as option.industry for option in industry" ng-change="updateProducts()">
+						<option value="">any industry</option>
+					</select>
+					<br />and
+					<select id="selProduct" ng-model="selProduct" ng-options="option.product as option.product for option in products" ng-change="updateResults()" >
+						<option value="">any product</option>
+					</select>
+					.
+					<div class="nl-submit-wrap">
+						<button class="nl-submit" type="submit" ng-click="findIt()" >Find It!</button>
+					</div>
+					<div class="nl-overlay"></div>
+				</form>
+			</div>
+		    <hr class="Line-Copy-2" id='resultsLine' style="display:none"/>
+			<div class="resultcontainer" id='resultsData' style="display:none">
+			<table class="table table-striped" style="width:90%;margin: 0 auto;">
+			    <thead class="thead-inverse">
+				<tr>
+					<th>Name</th>
+					<th>Industry</th>
+					<th>Product</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat = "result in resultData">
+					<td><a href="{{ selSolution }}/{{ result.name }}">{{ result.name }}</a></td>
+					<td><a href="{{ selSolution }}/industries/{{ result.industry }}">{{ result.industry }}</a></td>
+					<td><a href="{{ selSolution }}/products/{{ result.product }}">{{ result.product }}</a></td>
+				</tr>
+				</tbody>
+			</table>
+			</div>
+		    <hr class="Line-Copy-2"/>
+			<div class="submitcontainer">
+				<div class="row">
+					<div class="col-md-4"></div>
+					<div class="col-md-4">
+						<div class="Submit-a-Solution" >
+							<span><img class="lightbulb" src="assets/images/lightbulb.png"/></span><br/>
+							<span>Submit a Solution</span><br/>
+							<span>View my Solutions</span>
+						</div>
+						<div class="Submit-a-Solution-Wi" >
+							<img class="trophy" src="assets/images/trophy.png"/><br/>
+							<span>Submit a Solution Win</span><br/>
+							<span>View my Solutions Wins</span>
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div class="footer">
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<div class="row" style="margin-top:44px;">
+						<div class="col-md-4 footercol">Solutions<br/>Solution Wins<br/>People<br/>Enablement</div>
+						<div class="col-md-4 footercol">Standard<br/>View Demo Center</div>
+						<div class="col-md-4 footercol">Create an Incident</div>
+					</div>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+		</div>
+	</body>
+</html>
