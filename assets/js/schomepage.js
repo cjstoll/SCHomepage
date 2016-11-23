@@ -7,60 +7,84 @@
  * Date: November 2016
  * *****************************
  */
- //Angular Stuff
+
 var scApp  =  angular.module('scApp', []);
 
 scApp.controller('scController', ['$scope', '$http', function($scope, $http) { 
     $scope.master = {};
 	$scope.nlform;
+	//<select> Variables
 	$scope.selSolution = 'solutions';
 	$scope.selIndustry = '';
 	$scope.selProduct = '';
 	
+	//Arrays for holding the results that will populate the selects and/or results
 	$scope.industry = [];
 	$scope.products = [];
 	$scope.solutions = [];
 	$scope.resultData = [];	
 	
+	//Dataset for the first dropdown 'selSolution'
 	$scope.solutionTypes = [{ id:"solutions", name:"solution"},{ id:"wins", name:"winning solution"}];
 	
+	//Update the <select> for chosing the Industry based on the options available in the appropriate dataset
+	//The dataset must be reduced to a unique collection so that the user only sees one choice in the dropdown 
     $scope.updateIndustry = function() {
+		//Hide the results div
 		$('#resultsLine').hide();
 		$('#resultsData').hide();
+		
+		//Reset the Industry and Product dropdowns since the user has selected a new dataset
 		$scope.selIndustry = 'any industry';
 		$scope.selProduct = 'any product';
 		
+		//Get the working dataset based on the selection and populate the industry <select>
 		$http.get('assets/json/'+$scope.selSolution+'.json').success(function(data){ 
 			$scope.resultData = $scope.solutions = data;
 			$scope.industry = $scope.unique($scope.resultData,'industry'); 
 		});
 	};
+	
+	//Update the <select> for chosing the Products based on the Industry selected from the appropriate solution dataset
+    //The dataset must be reduced to a unique collection so that the user only sees one choice in the dropdown 
     $scope.updateProducts = function() {
+		//Hide the results div
 		$('#resultsLine').hide();
 		$('#resultsData').hide();
+		
+		//Reset the Product dropdown because the user has selected a new Industry
 		$scope.selProduct = 'any product';
+		
 		if($scope.selIndustry == null){
+			//If the user selected the 'any industry' option, then we need to reset the dataset to the full dataset for the selected solution.
 			$scope.updateIndustry();
 		}else{
+			//Filter (reduce) the current dataset to only those entries matching the selected industry
 			$scope.resultData = $scope.filter($scope.solutions,'industry',$scope.selIndustry);
 			$scope.products = $scope.unique($scope.resultData,'product'); 
 		}
 	};
 	$scope.updateResults = function() {
+		//Hide the results div
 		$('#resultsLine').hide();
 		$('#resultsData').hide();
+		
 		if($scope.selProduct == null){
+			//If the user selected the 'any product' option, then we need to reset the dataset to the collection based on the selected industry.
 			$scope.updateProducts();
 		}else{
+			//Filter (reduce) the current dataset to only those entries matching the selected product.
 			$scope.resultData = $scope.filter($scope.resultData,'product',$scope.selProduct);
 		}
 	};
+
+	//When the user clicks the 'Find It!' button, show the resulting table
     $scope.findIt = function() {
 		$('#resultsLine').show();
 		$('#resultsData').show();
-		console.log($scope.resultData);
     };
 	
+	//Function for creating a dataset of unique values
 	$scope.unique = function(data,key){
 		var temp = [];
 		var uniqData = [];
@@ -73,6 +97,8 @@ scApp.controller('scController', ['$scope', '$http', function($scope, $http) {
 		}
 		return uniqData;
 	};
+	
+	//Function for filtering the dataset based on the selected value in the dropdowns
 	$scope.filter = function(data,fKey,fVal){
 		var temp = [];
 		var filtered = [];
@@ -89,6 +115,7 @@ scApp.controller('scController', ['$scope', '$http', function($scope, $http) {
 		//Since the first dropdown loads with 'solutions' make the industry dropdown populated with the right data
 		$scope.updateIndustry();
 		
+		//Could not get the 'pretty' look of the overlays to function correctly.  Still working on it.
 		//$scope.nlform = new NLForm( document.getElementById( 'nl-form' ) );
 	});
 }]);
