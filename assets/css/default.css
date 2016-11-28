@@ -39,7 +39,7 @@ body {
 }
 a {
 	color: #888;
-	text-decoration: none;
+	text-decoration: none !important;
 }
 
 a:hover,
@@ -47,10 +47,9 @@ a:active {
 	color: #333;
 }
 
-select{
-  color: #fff;
-  background-color: #e11e25;
-  background-color: var(--lipstick);
+.nl-field-toggle{
+  color: #e11e25 !important;
+  color: var(--lipstick);
 }
 
 .container {
@@ -134,7 +133,6 @@ select{
 .resultcontainer {
   margin: 0 auto;
   width: 930px;
-  height: 450px;
   color: #000;
   background: #fff;
   background-color: #fff;
@@ -201,11 +199,11 @@ select{
 }
 .footercol{
   text-align: left;
-  font-size: 7px;
+  font-size: 10px;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 5.07;
+  line-height: 4;
   color: #dfdfdf;
 }
 

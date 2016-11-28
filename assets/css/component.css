@@ -83,8 +83,11 @@
 	color: #e11e25;
 	cursor: pointer;
 	border-bottom: 1px dashed #e11e25;
+	text-decoration: none;
 }
-
+.nl-field-toggle:hover{
+	color: #e11e25;
+}
 /* drop-down list / text element */
 .nl-field ul {
 	text-align: left;
