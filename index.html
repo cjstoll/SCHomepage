@@ -11,16 +11,15 @@
 		<meta name="author" content="cstoll" />
 		
 		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap-theme.min.css" />
 		<link rel="stylesheet" type="text/css" href="assets/css/component.css" />
 		<link rel="stylesheet" type="text/css" href="assets/css/default.css" />
 		
 		<script src="assets/js/jquery-3.1.1.min.js"></script>
+		<script src="assets/js/bootstrap.js"></script>
 		<script src="assets/js/bootstrap.min.js"></script>
 		<script src="assets/js/angular.min.js"></script>
 		<script src="assets/js/angular-ui.min.js"></script>
 		<script src="assets/js/modernizr.custom.js"></script>
-		<script src="assets/js/nlform.mod.js"></script>
 		<script src="assets/js/schomepage.js"></script>
 	</head>
 	<body>
@@ -41,21 +40,21 @@
 					<div class="nl-field nl-dd" ng-class="{'nl-field-open': nlFieldOpen.solutions}">
 					<a class="nl-field-toggle" ng-click="showFieldOpen('solutions')">{{selSolution}}</a>
 					<ul>
-						<li ng-repeat="option in solutionTypes" ng-click="updateIndustry(option.id)" ng-class="{ checked: selSolution == option.name }">{{option.name}}</li>
+						<li ng-repeat="option in solutionTypes" ng-click="updateIndustry(option.id)" ng-class="{'nl-dd-checked': selSolution == option.name}">{{option.name}}</li>
 					</ul>
 					</div>
 					for
 					<div class="nl-field nl-dd" ng-class="{'nl-field-open': nlFieldOpen.industry}">
 					<a class="nl-field-toggle" ng-click="showFieldOpen('industry')">{{selIndustry}}</a>
 					<ul>
-						<li ng-repeat="option in industry" ng-click="updateProducts(option.industry)" ng-class="{ checked: selIndustry == option.industry }">{{option.industry}}</li>
+						<li ng-repeat="option in industry" ng-click="updateProducts(option.industry)" ng-class="{'nl-dd-checked': selIndustry == option.industry}" >{{option.industry}}</li>
 					</ul>
 					</div>
 					<br />and
 					<div class="nl-field nl-dd" ng-class="{'nl-field-open': nlFieldOpen.products}">
 					<a class="nl-field-toggle" ng-click="showFieldOpen('products')">{{selProduct}}</a>
 					<ul>
-						<li ng-repeat="option in products" ng-click="updateResults(option.product)" ng-class="{ checked: selProduct == option.product }">{{option.product}}</li>
+						<li ng-repeat="option in products" ng-click="updateResults(option.product)" ng-class="{'nl-dd-checked': selProduct == option.product }">{{option.product}}</li>
 					</ul>
 					</div>
 					.
@@ -67,7 +66,7 @@
 			</div>
 		    <hr class="Line-Copy-2" id='resultsLine' style="display:none"/>
 			<div class="resultcontainer" id='resultsData' style="display:none">
-			<table class="table table-striped" style="width:90%;margin: 0 auto;">
+			<table class="table table-condensed" style="margin: 0 auto;">
 			    <thead class="thead-inverse">
 				<tr>
 					<th>Name</th>
@@ -77,9 +76,9 @@
 				</thead>
 				<tbody>
 				<tr ng-repeat = "result in resultData">
-					<td><a href="{{ selSolution }}/{{ result.name }}">{{ result.name }}</a></td>
-					<td><a href="{{ selSolution }}/industries/{{ result.industry }}">{{ result.industry }}</a></td>
-					<td><a href="{{ selSolution }}/products/{{ result.product }}">{{ result.product }}</a></td>
+					<td><a href="{{ typeSolution }}/{{ result.name }}">{{ result.name }}</a></td>
+					<td><a href="{{ typeSolution }}/industries/{{ result.industry }}">{{ result.industry }}</a></td>
+					<td><a href="{{ typeSolution }}/products/{{ result.product }}">{{ result.product }}</a></td>
 				</tr>
 				</tbody>
 			</table>

@@ -1,5 +1,5 @@
 /**
- * schomepage.js v1.0.0
+ * schomepage.js v1.0.3
  * Author: Christopher J Stoll
  *
  * Purpose: 
@@ -12,57 +12,68 @@ var scApp  =  angular.module('scApp', []);
 
 scApp.controller('scController', ['$scope', '$http', '$q', function($scope, $http, $q) { 
     $scope.master = {};
-	$scope.nlform;
-	//<select> Variables
+	
+	//Variables for holding the selected values
+	$scope.typeSolution = 'solutions';
 	$scope.selSolution = 'solution';
 	$scope.selIndustry = 'any industry';
 	$scope.selProduct = 'any product';
+	
+	//For toggling the overlays
 	$scope.nlFieldOpen = {
 		solutions: false,
 		industry: false,
 		products: false
 	};
 	
-	//Arrays for holding the results that will populate the selects and/or results
+	//Arrays for holding the results that will populate the specific overlays
 	$scope.industry = [];
 	$scope.products = [];
 	$scope.solutions = [];
+	
+	//Array for the results table
 	$scope.resultData = [];	
 	
 	//Dataset for the first dropdown 'selSolution'
 	$scope.solutionTypes = [{ id:"solutions", name:"solution"},{ id:"wins", name:"winning solution"}];
-	
-	
+
+	//Function to toggle the overlay display
 	$scope.showFieldOpen = function(field) {
 		$scope.nlFieldOpen[field] = !$scope.nlFieldOpen[field];
 	}
-	//Update the <select> for chosing the Industry based on the options available in the appropriate dataset
-	//The dataset must be reduced to a unique collection so that the user only sees one choice in the dropdown 
+	
+	//Update the overlay for choosing the Industry based on the options available in the appropriate dataset
+	//The dataset must be reduced to a unique collection so that the user only sees one choice in the selection overlay 
+	//Also, update the results table based on the solution type selected
     $scope.updateIndustry = function(id) {
-		
-		if(id=='wins'){
+		$scope.typeSolution = id;
+		if($scope.typeSolution == 'wins'){
 			$scope.selSolution = 'winning solution';
 		}else{
 			$scope.selSolution = 'solution';
 		}
+		
 		//Hide the results div
 		$('#resultsLine').hide();
 		$('#resultsData').hide();
 		
-		//Reset the Industry and Product dropdowns since the user has selected a new dataset
+		//Reset the Industry and Product overlays since the user has selected a new dataset
 		$scope.selIndustry = 'any industry';
 		$scope.selProduct = 'any product';
 		
 		//Get the working dataset based on the selection and populate the industry <select>
-		$http.get('assets/json/'+id+'.json').success(function(data){ 
+		$http.get('assets/json/'+$scope.typeSolution+'.json').success(function(data){ 
 			$scope.resultData = $scope.solutions = data;
 			$scope.industry = $scope.unique($scope.resultData,'industry'); 
 		});
+		
+		//Close the selection overlay
 		$scope.nlFieldOpen.solutions = false;
 	};
 	
-	//Update the <select> for chosing the Products based on the Industry selected from the appropriate solution dataset
-    //The dataset must be reduced to a unique collection so that the user only sees one choice in the dropdown 
+	//Update the overlay for choosing the Products based on the Industry selected from the appropriate solution dataset
+    //The dataset must be reduced to a unique collection so that the user only sees one choice in the selection overlay
+	//Update the results table based on the Industry selected
     $scope.updateProducts = function(id) {
 		
 		$scope.selIndustry = id;
@@ -71,7 +82,7 @@ scApp.controller('scController', ['$scope', '$http', '$q', function($scope, $htt
 		$('#resultsLine').hide();
 		$('#resultsData').hide();
 		
-		//Reset the Product dropdown because the user has selected a new Industry
+		//Reset the Product overlay because the user has selected a new Industry
 		$scope.selProduct = 'any product';
 		
 		if($scope.selIndustry == null){
@@ -82,8 +93,12 @@ scApp.controller('scController', ['$scope', '$http', '$q', function($scope, $htt
 			$scope.resultData = $scope.solutions = $scope.filter($scope.solutions,'industry',$scope.selIndustry);
 			$scope.products = $scope.unique($scope.resultData,'product'); 
 		}
+		
+		//Close the selection overlay
 		$scope.nlFieldOpen.industry = false;
 	};
+	
+	//Update the results table based on the Product selected
 	$scope.updateResults = function(id) {
 		
 		$scope.selProduct = id;
@@ -99,6 +114,8 @@ scApp.controller('scController', ['$scope', '$http', '$q', function($scope, $htt
 			//Filter (reduce) the current dataset to only those entries matching the selected product.
 			$scope.resultData = $scope.filter($scope.solutions,'product',$scope.selProduct);
 		}
+		
+		//Close the selection overlay
 		$scope.nlFieldOpen.products = false;
 	};
 
