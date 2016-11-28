@@ -38,15 +38,26 @@
 			<div class="main">
 				<form id="nl-form" class="nl-form">
 					I need a 
-					<select id="selSolution" ng-model="selSolution" ng-options="option.id as option.name for option in solutionTypes" ng-change="updateIndustry()"></select>
+					<div class="nl-field nl-dd" ng-class="{'nl-field-open': nlFieldOpen.solutions}">
+					<a class="nl-field-toggle" ng-click="showFieldOpen('solutions')">{{selSolution}}</a>
+					<ul>
+						<li ng-repeat="option in solutionTypes" ng-click="updateIndustry(option.id)" ng-class="{ checked: selSolution == option.name }">{{option.name}}</li>
+					</ul>
+					</div>
 					for
-					<select id="selIndustry" ng-model="selIndustry" ng-options="option.industry as option.industry for option in industry" ng-change="updateProducts()">
-						<option value="">any industry</option>
-					</select>
+					<div class="nl-field nl-dd" ng-class="{'nl-field-open': nlFieldOpen.industry}">
+					<a class="nl-field-toggle" ng-click="showFieldOpen('industry')">{{selIndustry}}</a>
+					<ul>
+						<li ng-repeat="option in industry" ng-click="updateProducts(option.industry)" ng-class="{ checked: selIndustry == option.industry }">{{option.industry}}</li>
+					</ul>
+					</div>
 					<br />and
-					<select id="selProduct" ng-model="selProduct" ng-options="option.product as option.product for option in products" ng-change="updateResults()" >
-						<option value="">any product</option>
-					</select>
+					<div class="nl-field nl-dd" ng-class="{'nl-field-open': nlFieldOpen.products}">
+					<a class="nl-field-toggle" ng-click="showFieldOpen('products')">{{selProduct}}</a>
+					<ul>
+						<li ng-repeat="option in products" ng-click="updateResults(option.product)" ng-class="{ checked: selProduct == option.product }">{{option.product}}</li>
+					</ul>
+					</div>
 					.
 					<div class="nl-submit-wrap">
 						<button class="nl-submit" type="submit" ng-click="findIt()" >Find It!</button>
