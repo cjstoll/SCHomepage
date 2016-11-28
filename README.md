@@ -23,4 +23,4 @@ Using a natural language search form (modeled after http://bit.ly/1HywsT0 - Natu
 
 #Update - 11/28/2016
 
-Incorporate visual change for the selection options from using dropdowns (<select/>) to using a <div/> with the class 'nl-overlay'.
+Incorporate visual change for the selection options from using dropdowns to using a 'div' with the class 'nl-overlay'.
