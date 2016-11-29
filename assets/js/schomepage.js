@@ -115,7 +115,7 @@ scApp.controller('scController', ['$scope', '$http', '$q', function($scope, $htt
 			$scope.updateProducts();
 		}else{
 			//Filter (reduce) the current dataset to only those entries matching the selected product.
-			$scope.resultData = $scope.filter($scope.resultData,'product',$scope.selProduct);
+			$scope.resultData = $scope.filter($scope.filter($scope.solutions,'industry',$scope.selIndustry),'product',$scope.selProduct);
 		}
 		
 		//Close the selection overlay
