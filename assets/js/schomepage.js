@@ -46,6 +46,8 @@ scApp.controller('scController', ['$scope', '$http', '$q', function($scope, $htt
 	//The dataset must be reduced to a unique collection so that the user only sees one choice in the selection overlay 
 	//Also, update the results table based on the solution type selected
     $scope.updateIndustry = function(id) {
+		$scope.industry = [];
+		$scope.products = [];
 		$scope.typeSolution = id;
 		if($scope.typeSolution == 'wins'){
 			$scope.selSolution = 'winning solution';
@@ -75,7 +77,7 @@ scApp.controller('scController', ['$scope', '$http', '$q', function($scope, $htt
     //The dataset must be reduced to a unique collection so that the user only sees one choice in the selection overlay
 	//Update the results table based on the Industry selected
     $scope.updateProducts = function(id) {
-		
+		$scope.products = [];
 		$scope.selIndustry = id;
 		
 		//Hide the results div
@@ -90,7 +92,7 @@ scApp.controller('scController', ['$scope', '$http', '$q', function($scope, $htt
 			$scope.updateIndustry();
 		}else{
 			//Filter (reduce) the current dataset to only those entries matching the selected industry
-			$scope.resultData = $scope.solutions = $scope.filter($scope.solutions,'industry',$scope.selIndustry);
+			$scope.resultData = $scope.filter($scope.solutions,'industry',$scope.selIndustry);
 			$scope.products = $scope.unique($scope.resultData,'product'); 
 		}
 		
@@ -109,10 +111,11 @@ scApp.controller('scController', ['$scope', '$http', '$q', function($scope, $htt
 		
 		if($scope.selProduct == null){
 			//If the user selected the 'any product' option, then we need to reset the dataset to the collection based on the selected industry.
+			
 			$scope.updateProducts();
 		}else{
 			//Filter (reduce) the current dataset to only those entries matching the selected product.
-			$scope.resultData = $scope.filter($scope.solutions,'product',$scope.selProduct);
+			$scope.resultData = $scope.filter($scope.resultData,'product',$scope.selProduct);
 		}
 		
 		//Close the selection overlay
